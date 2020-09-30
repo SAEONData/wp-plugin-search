@@ -25,6 +25,8 @@ function saeon_data_search($atts){
     'inputpadding' => '0 20px 0 45px',
     'iframe' => 'true',
     'minheight' => '800px',
+    'resultsonly' => 'true',
+    'allowsearch' => 'false',
 
   ), $atts
 
@@ -42,7 +44,14 @@ function saeon_data_search($atts){
         $html .= "</form>";
         if($iframe='true'){
             $html .= "<iframe id='sn-ds-iframe' src='https://catalogue.saeon.ac.za/render/records' style='min-height:{$minheight};display:none' /></iframe>";
-        }
+        };
+        if($resultsonly='true'){
+            $html .= "<input type='hidden' id='sn-ds-resultsonly' style='display:none' />";
+        };
+        if($allowsearch='false'){
+            $html .= "<input type='hidden' id='sn-ds-allowsearch' style='display:none' />";
+        };
+
 
   return $html;
  }

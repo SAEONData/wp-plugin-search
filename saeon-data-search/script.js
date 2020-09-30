@@ -8,18 +8,27 @@ jQuery(document).ready(function($) {
 		var searchurl = 'https://catalogue.saeon.ac.za/';
 		
 		var theframe = $('#sn-ds-iframe');
+		var resultsonly = $('#sn-ds-resultsonly');
+		var allowsearch = $('#sn-ds-allowsearch');
 		
+		var theframesrc = searchurl+'render/records?text='+searchterm;
+			if(allowsearch){
+				var searchurl = 'https://catalogue.saeon.ac.za/render/';
+			};
+			if(resultsonly){
+				var theframesrc = searchurl+'render/records?text='+searchterm+'&disableSidebar=true';
+			};
 		if(theframe){
-			//var theframesrc = $(searchurl + searchterm);
-			$(theframe).attr('src',searchurl + 'render/records?text=' + searchterm);
-			$(theframe).fadeIn(600);
+			
+			$(theframe).attr('src',theframesrc).fadeIn(600);
+			//$(theframe)
 			
 		}else{
-			console.log('iframe false');
+		//	console.log('iframe false');
 		// var searchterm = $('.ds-datasearch').val();
 		// var searchurl = 'https://catalogue.saeon.ac.za/records?text='
 		// //console.log(searchurl + searchterm);
-		// window.open(searchurl + searchterm,'_blank');
+		 window.open(searchurl + theframesrc,'_blank');
 		}
 	});
 	
