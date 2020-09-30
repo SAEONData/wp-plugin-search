@@ -41,7 +41,7 @@ function saeon_data_search($atts){
         $html .= "s-17-7.626-17-17S14.61,6,23.984,6z'/></svg></button>";
         $html .= "</form>";
         if($iframe='true'){
-            $html .= "<iframe src='https://catalogue.saeon.ac.za/render/records' style='min-height:{$minheight};display:none' /></iframe>";
+            $html .= "<iframe id='sn-ds-iframe' src='https://catalogue.saeon.ac.za/render/records' style='min-height:{$minheight};display:none' /></iframe>";
         }
 
   return $html;
@@ -100,12 +100,14 @@ function saeon_data_search_scripts_page()
         <p style="border: 1px solid #ccd0d4;background: #fff;padding: 10px 20px;font-size: 16px;display: inline-block;">[saeon-data-search]</p>
         <br /><strong>Shortcode Variables:</strong>
         <ul>
-            <li><strong>placeholder=""</strong><em>e.g. "Search Data"</em></li>
-            <li><strong>border=""</strong><em>e.g. "1px solid #ccc"</em></li>
-            <li><strong>background=""</strong><em>e.g. "transparent"</em></li>
-            <li><strong>iconcolor=""</strong><em>e.g. "#000"</em></li>
-            <li><strong>inputheight=""</strong><em>e.g. "initial"</em></li>
-            <li><strong>inputpadding=""</strong><em>e.g. "0 20px 0 45px"</em></li>
+            <li><strong>placeholder="" </strong><em>e.g. "Search Data"</em></li>
+            <li><strong>border="" </strong><em>e.g. "1px solid #ccc"</em></li>
+            <li><strong>background="" </strong><em>e.g. "transparent"</em></li>
+            <li><strong>iconcolor="" </strong><em>e.g. "#000"</em></li>
+            <li><strong>inputheight="" </strong><em>e.g. "initial"</em></li>
+            <li><strong>inputpadding="" </strong><em>e.g. "0 20px 0 45px"</em></li>
+            <li><strong>iframe="" </strong><em>e.g. "true",</em></li>
+            <li><strong>minheight="" </strong><em>e.g. "800px"</em></li>
         </ul>
         <p>example of added variables: [saeon-data-search placeholder="Search Data" border="1px solid #ccc" background="transparent" iconcolor"#000"]</p>
         <h2>Add options</h2>
