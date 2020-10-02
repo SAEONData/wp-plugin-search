@@ -23,10 +23,10 @@ function saeon_data_search($atts){
     'iconcolor' => '#000',
     'inputheight' => 'initial',
     'inputpadding' => '0 20px 0 45px',
-    'iframe' => 'true',
+    'iframe' => 'false',
     'minheight' => '800px',
-    'resultsonly' => 'true',
-    'allowsearch' => 'false',
+    'resultsonly' => 'false',
+    'allowsearch' => 'true',
 
   ), $atts
 
@@ -42,13 +42,13 @@ function saeon_data_search($atts){
         $html .= "c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  ";
         $html .= "s-17-7.626-17-17S14.61,6,23.984,6z'/></svg></button>";
         $html .= "</form>";
-        if($iframe='true'){
+        if($iframe=='true'){
             $html .= "<iframe id='sn-ds-iframe' src='https://catalogue.saeon.ac.za/render/records' style='min-height:{$minheight};display:none' /></iframe>";
         };
-        if($resultsonly='true'){
+        if($resultsonly=='true'){
             $html .= "<input type='hidden' id='sn-ds-resultsonly' style='display:none' />";
         };
-        if($allowsearch='false'){
+        if($allowsearch=='false'){
             $html .= "<input type='hidden' id='sn-ds-allowsearch' style='display:none' />";
         };
 
@@ -56,6 +56,14 @@ function saeon_data_search($atts){
   return $html;
  }
  add_shortcode( 'saeon-data-search', 'saeon_data_search' );
+
+ function saeon_data_search_results(){
+     ?>
+     <div id="saeon-data-search-resuts"></div>
+     <?php
+ }
+ add_shortcode( 'saeon-data-search-resuts', 'saeon_data_search_results' );
+
 
 /* Include files */
 function data_support_files() {
@@ -82,32 +90,60 @@ function saeon_data_search_scripts_page()
 {
     /* The stored fields */
     
-    if(array_key_exists('submit_scripts_update',$_POST))
-    {
-        echo'hey';
-        update_option('saeon_data_search_sidebar',$_POST['sidebar']);
-        update_option('saeon_data_search_iframeload',$_POST['iframeload']);
-        update_option('saeon_data_search_filtertags',$_POST['filtertags']);
-        ?>
-           <div id="setting-error-settings_updated" class="updated settings_error notice is-dismissible">
-                <strong>settings have been changed</strong>
-            </div>
-        <?php
-    }
-    echo'hey there';
+    // if(array_key_exists('submit_scripts_update',$_POST))
+    // {
+    //     echo'hey';
+    //     update_option('saeon_data_search_sidebar',$_POST['sidebar']);
+    //     update_option('saeon_data_search_iframeload',$_POST['iframeload']);
+    //     update_option('saeon_data_search_filtertags',$_POST['filtertags']);
+    //     ?>
+    <!-- //        <div id="setting-error-settings_updated" class="updated settings_error notice is-dismissible">
+    //             <strong>settings have been changed</strong>
+    //         </div>
+    //     <?php 
+    // }
+    // echo'hey there';
 
 
-    $sidebar = get_option('saeon_data_search_sidebar','checked');
-    $iframeload = get_option('saeon_data_search_iframeload','');
-    $filtertags = get_option('saeon_data_search_filtertags','test');
+    // $sidebar = get_option('saeon_data_search_sidebar','checked');
+    // $iframeload = get_option('saeon_data_search_iframeload','');
+    // $filtertags = get_option('saeon_data_search_filtertags','test');
 
     ?>
     <!-- The admin page content -->
+    <style>
+        .sn-ds-table{
+            width: 100%;
+            border: 1px solid #ccd0d4;
+            background: #fff;
+        }
+        .sn-ds-table td{
+            vertical-align:top;
+            padding:10px;
+        }
+        .sn-ds-cell-dark{
+            background: #ccd0d4;
+        }
+        .sn-ds-block{
+            border: 1px solid #ccd0d4;
+            background: #fff;
+            padding: 10px 20px;
+            font-size: 16px;
+            display: inline-block;
+            margin-right:10px;
+        }
+    </style>
     <div class="wrap">
         <h2>SAEON Data Search Shortcode</h2>
         <p>Paste the following shortcode on any page to display data search</p>
-        <p style="border: 1px solid #ccd0d4;background: #fff;padding: 10px 20px;font-size: 16px;display: inline-block;">[saeon-data-search]</p>
+        <p><div class="sn-ds-block">[saeon-data-search]</div>
+        <!-- <div class="sn-ds-block">[saeon-data-search-resuts]</div> -->
+        </p>
         <br /><strong>Shortcode Variables:</strong>
+        <table class="sn-ds-table">
+        <tr>
+        <td>
+        <h3>Styling attributes:</h3><br/>
         <ul>
             <li><strong>placeholder="" </strong><em>e.g. "Search Data"</em></li>
             <li><strong>border="" </strong><em>e.g. "1px solid #ccc"</em></li>
@@ -115,22 +151,33 @@ function saeon_data_search_scripts_page()
             <li><strong>iconcolor="" </strong><em>e.g. "#000"</em></li>
             <li><strong>inputheight="" </strong><em>e.g. "initial"</em></li>
             <li><strong>inputpadding="" </strong><em>e.g. "0 20px 0 45px"</em></li>
-            <li><strong>iframe="" </strong><em>e.g. "true",</em></li>
             <li><strong>minheight="" </strong><em>e.g. "800px"</em></li>
         </ul>
-        <p>example of added variables: [saeon-data-search placeholder="Search Data" border="1px solid #ccc" background="transparent" iconcolor"#000"]</p>
-        <h2>Add options</h2>
+        </td>
+        <td>
+        <h3>functionality attributes: (true/false)</h3><br/>
+        <ul>
+            <li><strong>iframe="" </strong><em>e.g. "true"</em>use shortcode <strong>[saeon-data-search-resuts]</strong> if you want to place iframe results in another location on the page</li>
+            <li><strong>resultsonly="" </strong><em>e.g. "true"</em></li>
+            <li><strong>allowsearch="" </strong><em>e.g. "false"</em></li>
+        </ul>
+        </td>
+        </tr>
+        <tr class="sn-ds-cell-dark"><td colspan="2">example of added variables:<br/>[saeon-data-search placeholder="Search Data" border="1px solid #ccc" background="transparent" iconcolor"#000"]</td></tr>
+        </table>
+
+        <!-- <h2>Add options</h2>
         <form method="post" action="">
         <input type="checkbox" name="iframeload" id="iframeload" <?php print $iframeload; ?>/><label for="iframeload">Show results in same page</label><br  />
         <input type="checkbox" name="sidebar" id="sidebar" <?php print $sidebar; ?> /><label for="sidebar">Show results sidebar</label><br  />
         <label for="filtertags"><input type="text" name="filtertags" value="<?php print $filtertags; ?>" />Filter results by these tags</label><br />
-        <input type="submit" name="submit_scripts_update" class="button button-primary" value="UPDATE" />
+        <input type="submit" name="submit_scripts_update" class="button button-primary" value="UPDATE" /> -->
         <!-- class="large-text"  -->
         </form>
     </div>
 
     <?php
-global $post;
-    print_r($_POST);
+// global $post;
+//     print_r($_POST);
 }
  ?>
