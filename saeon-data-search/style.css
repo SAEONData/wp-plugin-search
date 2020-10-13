@@ -6,6 +6,7 @@
   min-height: 35px;
   display: inline-block;
   min-width: 300px;
+  margin:0 auto;
 }
 .ds-datasearch{
   position: absolute;

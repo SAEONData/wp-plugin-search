@@ -10,8 +10,11 @@ jQuery(document).ready(function($) {
 		var theframe = $('#sn-ds-iframe');
 		var resultsonly = $('#sn-ds-resultsonly');
 		var allowsearch = $('#sn-ds-allowsearch');
+		var origin_id = window.location.origin; 
+		//var origin_id = encodeURIComponent(origin_uri);
+		console.log(origin_id);
 		
-		var theframesrc = searchurl+'render/records?text='+searchterm;
+		var theframesrc = searchurl+'render/records?text='+searchterm+'&origin_id='+origin_id;
 
 		var resultsshortcode = $('#saeon-data-search-resuts');
 
@@ -23,10 +26,11 @@ jQuery(document).ready(function($) {
 			searchurl = 'https://catalogue.saeon.ac.za/';
 		};
 		if(resultsonly){
-			var theframesrc = searchurl+'records?text='+searchterm+'&disableSidebar=true';
+			var theframesrc = searchurl+'render/records?text='+searchterm+'&disableSidebar=true'+'&origin_id='+origin_id;;
 		};
 		if(theframe){
 			$(theframe).attr('src',theframesrc).fadeIn(600);	
+			console.log('open in framer');
 		}
 		if(theframe.length === 0){
 			window.open(theframesrc,'_blank');
