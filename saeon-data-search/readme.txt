@@ -4,7 +4,7 @@ License: GPL v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Tags: SEO, XML sitemap, Content analysis, Readability, Schema
 Tested up to: 5.5.1
-Stable tag: 1.0
+Stable tag: 1.0.0
 Requires PHP: 7.2
 
 Use a shortcode to display a data search field for the SAEON ODP Catalog of South African Environmental Data.

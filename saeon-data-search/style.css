@@ -8,12 +8,12 @@
   min-width: 300px;
   margin:0 auto;
 }
+.sn-ds-form:after{
+  display: block;
+  content: "";
+  clear:both;
+}
 .ds-datasearch{
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
   width: 100%;
   border: 1px solid #ccc;
   padding: 0 20px 0 45px;
@@ -21,6 +21,9 @@
   line-height: 33px;
   height: 35px;
   margin: 0 auto;
+}
+.ds-datasearch:focus {
+  outline: none;
 }
 .ds-btn-search{
   position: absolute;

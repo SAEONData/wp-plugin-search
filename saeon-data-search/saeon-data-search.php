@@ -4,7 +4,7 @@
  * Description: Use a shortcode to display data search field for the SAEON ODP Catalog of South African Environmental Data
  * Author: SAEON
  * Author URI: https://ulwazi.saeon.ac.za
- * Version: 1.0
+ * Version: 1.0.0
  * Requires at least: 5.2
  * Tested up to: 5.5.1
  * Requires PHP: 7.2
@@ -24,6 +24,7 @@ function saeon_data_search($atts){
 
     'placeholder' => 'Search Data',
     'border' => '1px solid #ccc',
+    'borderradius' => '0px',
     'background' => 'transparent',
     'iconcolor' => '#000',
     'inputheight' => 'initial',
@@ -32,14 +33,17 @@ function saeon_data_search($atts){
     'minheight' => '800px',
     'resultsonly' => 'false',
     'allowsearch' => 'true',
+    'textcolor' => 'initial',
+    'placeholdercolor' => 'initial',
+    'formwidth' => 'initial'
 
   ), $atts
 
 ));
 
 // Render HTML where shortcode loads
-$html = "<form class='sn-ds-form'>";
-$html .= "<input type='text' class='ds-datasearch' placeholder='{$placeholder}' style='border:{$border};background:{$background};height:{$inputheight};padding:{$inputpadding}'>";
+$html = "<form class='sn-ds-form' style='width:{$formwidth}'>";
+$html .= "<input type='text' class='ds-datasearch' placeholder='{$placeholder}' style='border:{$border};color:{$textcolor};border-radius:{$borderradius};background:{$background};height:{$inputheight};padding:{$inputpadding}'>";
 $html .= "<button class='ds-btn-search' type='submit'>";
 $html .= "<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1' id='s_search' x='0px' ";
 $html .= "y='0px' viewBox='0 0 56.966 56.966' style='enable-background:new 0 0 56.966 56.966;' xml:space='preserve'>";
@@ -47,7 +51,8 @@ $html .= "<path style='fill:{$iconcolor};' d='M55.146,51.887L41.588,37.786c3.486
 $html .= "s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  ";
 $html .= "c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  ";
 $html .= "s-17-7.626-17-17S14.61,6,23.984,6z'/></svg></button>";
-$html .= "</form>";
+$html .= "</form><style> .ds-datasearch::placeholder ";
+$html .= "{ color: {$placeholdercolor}!important; } </style>";
     if($iframe=='true'){ // attribute for loading iframe option
         $html .= "<iframe id='sn-ds-iframe' src='https://catalogue.saeon.ac.za/render/records' style='min-height:{$minheight};display:none' /></iframe>";
     };
@@ -127,11 +132,15 @@ function saeon_data_search_scripts_page()
         <ul>
             <li><strong>placeholder="" </strong><em>e.g. "Search Data"</em></li>
             <li><strong>border="" </strong><em>e.g. "1px solid #ccc"</em></li>
+            <li><strong>borderradius="" </strong><em>e.g. "0px"</em></li>
             <li><strong>background="" </strong><em>e.g. "transparent"</em></li>
             <li><strong>iconcolor="" </strong><em>e.g. "#000"</em></li>
             <li><strong>inputheight="" </strong><em>e.g. "initial"</em></li>
             <li><strong>inputpadding="" </strong><em>e.g. "0 20px 0 45px"</em></li>
             <li><strong>minheight="" </strong><em>e.g. "800px"</em></li>
+            <li><strong>textcolor="" </strong><em>e.g. "#fff"</em></li>
+            <li><strong>placeholdercolor="" </strong><em>e.g. "#fff"</em></li>
+            <li><strong>formwidth="" </strong><em>e.g. "100%"</em></li>
         </ul>
         </td>
         <td>
